@@ -121,6 +121,7 @@ install_sycgram(){
     --name ${CONTAINER_NAME} \
     --env TZ="Asia/Shanghai" \
     --restart always \
+    --hostname ${CONTAINER_NAME} \
     -v ${PROJECT_PATH}/data:/sycgram/data \
     ${GITHUB_IMAGE_PATH}:latest
 }
