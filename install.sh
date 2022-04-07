@@ -77,11 +77,16 @@ fi
 }
 
 stop_sycgram(){
-    docker stop $(docker ps -a | grep ${GITHUB_IMAGE_NAME} | awk '{print $1}')
+    res=$(docker stop $(docker ps -a | grep ${GITHUB_IMAGE_NAME} | awk '{print $1}'))
+    if [[ $res ]];then
+        echo -e "${yellow}已停止sycgram...${plain}"
+    else
+        echo -e "${red}无法停止sycgram...${plain}"
+    fi
 }
 
 view_docker_log(){
-    docker logs -f $(docker ps -a | grep sycgram | awk '{print $1}')
+    docker logs -f $(docker ps -a | grep ${GITHUB_IMAGE_NAME} | awk '{print $1}')
 }
 
 uninstall_sycgram(){
@@ -100,7 +105,7 @@ install_sycgram(){
     delete_old_image_and_container;
 
     echo -e "正在拉取镜像..."
-    docker pull ghcr.io/iwumingz/sycgram:latest
+    docker pull ${GITHUB_IMAGE_PATH}:latest
 
     echo -e "正在启动容器..."
     docker run $1 \

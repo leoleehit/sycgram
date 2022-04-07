@@ -53,13 +53,13 @@ s:
     回复使用时，可以指定emoji，不指定则使用默认emoji
 
 trace:
-  format: -trace <emoji>
-  usage: 回复一条消息，当目标消息的主人发消息时，自动丢<emoji>。默认：💩
+  format: -trace <emoji|clear|list>
+  usage: 回复一条消息，当目标消息的主人发消息时，自动丢<emoji>，默认：💩。直接使用，清除所有trace目标（或展示trace名单）
 
 cc:
-  format: -cc <数量> or -cc <emoji>
+  format: -cc <数量> or -cc <emoji|set>
   usage: 回复使用：遍历该消息的主人发过的消息并丢<数量>个<emoji>给Ta；直接使用：
-    指令<emoji>为默认emoji。数量范围：1 ~ 233，Emoji默认为：💩
+    指令<emoji>为默认emoji，若参数为set，则设置随机emoji。数量范围：1 ~ 233，Emoji默认为：💩
 
 cal:
   format: -cal <四则运算式>
