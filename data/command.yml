@@ -42,6 +42,10 @@ ex:
   format: -ex <数字> <FROM> <TO>
   usage: 汇率转换
 
+google:
+  format: -google <无|搜索内容>
+  usage: 回复一条消息，或直接使用
+
 speedtest:
   format: -speedtest <无|节点ID|list|update>
   usage: 服务器本地网络测速

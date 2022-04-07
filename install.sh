@@ -5,7 +5,7 @@ CONTAINER_NAME="sycgram"
 GITHUB_IMAGE_NAME="iwumingz/${CONTAINER_NAME}"
 GITHUB_IMAGE_PATH="ghcr.io/${GITHUB_IMAGE_NAME}"
 PROJECT_PATH="/opt/${CONTAINER_NAME}"
-PROJECT_VERSION="v1.0.0"
+PROJECT_VERSION="v1.0.2"
 
 red='\033[0;31m'
 green='\033[0;32m'
@@ -85,6 +85,15 @@ stop_sycgram(){
     fi
 }
 
+restart_sycgram(){
+    res=$(docker restart $(docker ps -a | grep ${GITHUB_IMAGE_NAME} | awk '{print $1}'))
+    if [[ $res ]];then
+        echo -e "${yellow}已重启sycgram...${plain}"
+    else
+        echo -e "${red}无法重启sycgram...${plain}"
+    fi
+}
+
 view_docker_log(){
     docker logs -f $(docker ps -a | grep ${GITHUB_IMAGE_NAME} | awk '{print $1}')
 }
@@ -121,12 +130,13 @@ show_menu() {
     echo -e "  ${green}1.${plain}  安装"
     echo -e "  ${green}2.${plain}  更新"
     echo -e "  ${green}3.${plain}  停止"
-    echo -e "  ${green}4.${plain}  查看日志"
-    echo -e "  ${green}5.${plain}  重新安装"
-    echo -e "  ${green}6.${plain}  卸载"
+    echo -e "  ${green}4.${plain}  重启"
+    echo -e "  ${green}5.${plain}  查看日志"
+    echo -e "  ${green}6.${plain}  重新安装"
+    echo -e "  ${green}7.${plain}  卸载"
     echo -e "  ${green}0.${plain}  退出脚本"
     echo -n "请选择编号: "
-    read -ep "请输入选择 [0-6]: " option
+    read -ep "请输入选择 [0-7]: " option
     case "${option}" in
     0)
         exit 0
@@ -141,12 +151,15 @@ show_menu() {
         stop_sycgram
         ;;
     4)
-        view_docker_log
+        restart_sycgram
         ;;
     5)
-        reinstall_sycgram
+        view_docker_log
         ;;
     6)
+        reinstall_sycgram
+        ;;
+    7)
         uninstall_sycgram
         ;;
     *)
