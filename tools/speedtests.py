@@ -118,8 +118,10 @@ class Speedtester:
         def exists_file() -> bool:
             return path.exists(SPEEDTEST_PATH_FILE)
 
-        if platform.uname().system != "Linux":
-            text = f"Unsupported System >>> {platform.uname().system}"
+        if platform.uname().system != "Linux" or platform.uname().machine not in [
+            'i386', 'x86_64', 'armel', 'armhf', 'aarch64',
+        ]:
+            text = f"Unsupported System >>> {platform.uname().system} - {platform.uname().machine}"
             logger.warning(text)
             return text
         elif opt == 'install':
