@@ -11,7 +11,7 @@ from tools.helpers import Parameters
 
 @Client.on_message(command("google"))
 async def google(_: Client, msg: Message):
-    """谷歌搜索，并展示前9条标题记录"""
+    """谷歌搜索并展示第一页结果和链接"""
     replied_msg = msg.reply_to_message
     if not replied_msg:
         _, args = Parameters.get(msg)
@@ -21,7 +21,7 @@ async def google(_: Client, msg: Message):
     try:
         res = await google_search(args)
         content = '\n\n'.join(
-            f"[{k}]({v})" for k, v in res.items()
+            f"[{title[0:30]}]({url})" for title, url in res.items()
         )
         text = f"🔎 | **Google** | `{args}`\n{content}"
         await msg.edit_text(

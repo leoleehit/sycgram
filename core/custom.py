@@ -19,7 +19,11 @@ from tools.storage import SimpleStore
 
 def command(command: Union[str, List[str]]):
     """匹配UserBot指令"""
-    return filters.me & filters.text & filters.command(command, '-')
+    # 指令前缀
+    # 例一：prefixes = "-"
+    # 例二：prefixes = ["-", "/", "+"]
+    prefixes = "-"
+    return filters.me & filters.text & filters.command(command, prefixes)
 
 
 def is_traced():
