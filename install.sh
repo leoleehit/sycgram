@@ -5,7 +5,7 @@ CONTAINER_NAME="sycgram"
 GITHUB_IMAGE_NAME="iwumingz/${CONTAINER_NAME}"
 GITHUB_IMAGE_PATH="ghcr.io/${GITHUB_IMAGE_NAME}"
 PROJECT_PATH="/opt/${CONTAINER_NAME}"
-PROJECT_VERSION="v1.0.2"
+PROJECT_VERSION="v1.0.3"
 
 red='\033[0;31m'
 green='\033[0;32m'
@@ -47,12 +47,17 @@ pre_check() {
 delete_old_image_and_container(){
     # 获取最新指令说明
     target="https://raw.githubusercontent.com/iwumingz/sycgram/main/data/command.yml"
+    local_cmd_file="${PROJECT_PATH}/data/command.yml"
+    if [[ -f ${local_file} ]]; then
+        echo -e "${yello}正在备份${local_cmd_file}${plain}"
+        cp ${local_file} "${local_file}.bk"
+    fi
     curl -fsL ${target} > "${PROJECT_PATH}/data/command.yml"
 
-    echo "正在删除旧版本容器..."
+    echo -e "${yellow}正在删除旧版本容器...${plain}"
     docker rm -f $(docker ps -a | grep ${CONTAINER_NAME} | awk '{print $1}')
 
-    echo "正在删除旧版本镜像..."
+    echo -e "${yellow}正在删除旧版本镜像...${plain}"
     docker image rm -f $(docker images | grep ${CONTAINER_NAME} | awk '{print $3}')
 }
 
@@ -113,10 +118,10 @@ install_sycgram(){
     check_and_create_config;
     delete_old_image_and_container;
 
-    echo -e "正在拉取镜像..."
+    echo -e "${yellow}正在拉取镜像...${plain}"
     docker pull ${GITHUB_IMAGE_PATH}:latest
 
-    echo -e "正在启动容器..."
+    echo -e "${yellow}正在启动容器...${plain}"
     docker run $1 \
     --name ${CONTAINER_NAME} \
     --env TZ="Asia/Shanghai" \
