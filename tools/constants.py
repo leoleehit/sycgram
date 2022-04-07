@@ -11,7 +11,7 @@ HTTP_HEADERS: Dict[str, str] = {
 # ------------- speedtest --------------
 SPEEDTEST_PATH_FILE: str = './data/speedtest'
 SPEEDTEST_INSTALL_URL: str = "https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-$(uname -m).tgz"
-INSTALL_SPEEDTEST: str = """wget -qO- "{SPEEDTEST_INSTALL_URL}" | tar zx -C ./data speedtest"""
+INSTALL_SPEEDTEST: str = f"""wget -qO- "{SPEEDTEST_INSTALL_URL}" | tar zx -C ./data speedtest"""
 SPEEDTEST_RUN: str = f'{SPEEDTEST_PATH_FILE} --accept-license --accept-gdpr -f json'
 
 # ------------- sticker --------------
