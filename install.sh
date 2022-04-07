@@ -46,13 +46,18 @@ pre_check() {
 
 delete_old_image_and_container(){
     # 获取最新指令说明
-    target="https://raw.githubusercontent.com/iwumingz/sycgram/main/data/command.yml"
+    # 远程file
+    remote_file="https://raw.githubusercontent.com/iwumingz/sycgram/main/data/command.yml"
+    # 本地file
     local_cmd_file="${PROJECT_PATH}/data/command.yml"
-    if [[ -f ${local_file} ]]; then
-        echo -e "${yello}正在备份${local_cmd_file}${plain}"
-        cp ${local_file} "${local_file}.bk"
+    if [[ -f ${local_cmd_file} ]]; then
+        t=$(date "+%H_%M_%M")
+        mkdir -p "${PROJECT_PATH}/data/command" >/dev/null 2>&1
+
+        echo -e "${yello}正在备份${plain} >>> ${local_cmd_file}"
+        cp ${local_cmd_file} "${PROJECT_PATH}/data/command/command.yml.${t}"
     fi
-    curl -fsL ${target} > "${PROJECT_PATH}/data/command.yml"
+    curl -fsL ${remote_file} > ${local_cmd_file}
 
     echo -e "${yellow}正在删除旧版本容器...${plain}"
     docker rm -f $(docker ps -a | grep ${CONTAINER_NAME} | awk '{print $1}')
