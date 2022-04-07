@@ -37,7 +37,7 @@ pre_check() {
     fi
 
     command -v tar >/dev/null 2>&1
-    if [[ $? == 0 ]]; then
+    if [[ $? != 0 ]]; then
         echo -e "正在安装tar..."
         apt install tar -y >/dev/null 2>&1
         echo -e "${green}tar${plain} 安装成功"
