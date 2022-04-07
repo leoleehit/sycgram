@@ -1,86 +1,119 @@
+# 注意，勿随意更改顶级的Key
+# 按需改动
+
+# 指令 - 例子 - 格式二选一
+# cmd: "help"
+# cmd: ["help", "helper"]
+
+# 指令前缀 - 例子 - 格式二选一
+# all_prefixes:"-"
+# all_prefixes: ["-", "/", "+"]
+
 help:
+  all_prefixes: "-"
+  cmd: help
   format: -help <command>
   usage: 指令列表
 
 note:
+  cmd: note
   format: -note <save|del> <序号> or -note <序号|list|clear>
   usage: 回复一条消息，根据序号保存/删除该消息文本
 
 dme:
+  cmd: dme
   format: -dme <数量>
   usage: 直接使用。批量删除消息, 范围：1 ~ 1500，默认：1
 
 f:
+  cmd: f
   format: -f <数量>
   usage: 回复一条消息，转发该消息n次。范围：1 ~ 30， 默认：1
 
 cp:
+  cmd: cp
   format: -cp <数量>
   usage: 回复一条消息，无引用转发该消息n次。范围：1 ~ 30， 默认：1
 
 ghost:
+  cmd: ghost
   format: -ghost <status|list>
   usage: 直接使用。开启ghost的对话会被自动标记为已读
 
 id:
+  cmd: id
   format: -id
   usage: 回复一条消息或直接使用，查看对话及消息的ID
 
 sb:
+  cmd: sb
   format: -sb
   usage: 回复一条消息，将在所有共同且拥有管理踢人权限的群组中踢出目标消息的主人
 
 dc:
+  cmd: dc
   format: -dc
   usage: 回复一条消息，或者直接使用。查看目标消息或当前对话的DC区
 
 pingdc:
+  cmd: pingdc
   format: -pingdc
   usage: 测试与各个DC的延时
 
 ex:
+  cmd: ex
   format: -ex <数字> <FROM> <TO>
   usage: 汇率转换
 
 google:
+  cmd: google
   format: -google <无|搜索内容>
   usage: 回复一条消息，或直接使用
 
 speedtest:
+  cmd: speedtest
   format: -speedtest <无|节点ID|list|update>
   usage: 服务器本地网络测速
 
 s:
+  cmd: s
   format: -s <无|emoji> or -s <sticker_set_title> <sticker_set_name>
   usage:
     收集回复的贴纸/图片/图片文件消息。直接使用时，可以设置默认贴纸包标题&名字；
     回复使用时，可以指定emoji，不指定则使用默认emoji
 
 trace:
+  cmd: trace
   format: -trace <emoji|clear|list>
   usage: 回复一条消息，当目标消息的主人发消息时，自动丢<emoji>，默认：💩。直接使用，清除所有trace目标（或展示trace名单）
 
 cc:
+  cmd: cc
   format: -cc <数量> or -cc <emoji|set>
   usage: 回复使用：遍历该消息的主人发过的消息并丢<数量>个<emoji>给Ta；直接使用：
     指令<emoji>为默认emoji，若参数为set，则设置随机emoji。数量范围：1 ~ 233，Emoji默认为：💩
 
 cal:
+  cmd: cal
   format: -cal <四则运算式>
   usage: 直接使用。默认除法精确到小数点后4位
 
 sh:
+  cmd: sh
   format: -sh <shell脚本>
   usage: 直接使用
 
 sysinfo:
+  cmd: sysinfo
   format: -sysinfo
   usage: 直接使用，查看系统信息
 
 diss:
+  cmd: ["diss", "biss"]
   format: -diss or -biss
   usage: 喷子语录
 
 tg:
+  cmd: tg
   format: -biss
   usage: 舔狗语录
