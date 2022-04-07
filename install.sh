@@ -135,7 +135,6 @@ show_menu() {
     echo -e "  ${green}6.${plain}  重新安装"
     echo -e "  ${green}7.${plain}  卸载"
     echo -e "  ${green}0.${plain}  退出脚本"
-    echo -n "请选择编号: "
     read -ep "请输入选择 [0-7]: " option
     case "${option}" in
     0)
