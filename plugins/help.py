@@ -15,7 +15,7 @@ async def helper(_: Client, msg: Message):
         text = f"📢 **指令列表：**\n{tmp}\n\n**发送** `-help <cmd>` **查看某指令的详细用法**"
 
     elif not cmd_data.get(cmd):
-        text = f'❓ `{cmd}` Command Not Found'
+        text = f'❓ `{cmd}` 404 Not Found'
 
     else:
         text = f"格式：`{cmd_data.get(cmd).get('format')}`\n" \
