@@ -10,14 +10,15 @@ HTTP_HEADERS: Dict[str, str] = {
 
 # ------------- speedtest --------------
 SPEEDTEST_PATH_FILE: str = './data/speedtest'
-SPEEDTEST_CLI: str = "https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-<arch>.tgz"
-INSTALL_SPEEDTEST: str = f"wget -qO- {SPEEDTEST_CLI} | tar zx -C ./data speedtest"
+SPEEDTEST_INSTALL_URL: str = "https://install.speedtest.net/app/cli/ookla-speedtest-1.1.1-linux-$(uname -m).tgz"
+INSTALL_SPEEDTEST: str = """wget -qO- "{SPEEDTEST_INSTALL_URL}" | tar zx -C ./data speedtest"""
 SPEEDTEST_RUN: str = f'{SPEEDTEST_PATH_FILE} --accept-license --accept-gdpr -f json'
 
 # ------------- sticker --------------
 STICKER_BOT: int = 429000
 STICKER_IMG: str = './data/img/tmp.png'
-STICKER_DESCRIP: str = b'A Telegram user has created the Sticker\xc2\xa0Set.'.decode('utf-8')
+STICKER_DESCRIP: str = b'A Telegram user has created the Sticker\xc2\xa0Set.'.decode(
+    'utf-8')
 GT_120_STICKERS: str = "Whoa! That's probably enough stickers for one set, " \
                        "give it a break. A set can't have more than 120 stickers at the moment."
 UNACCEPTABLE_SET_NAME: str = 'Sorry, this short name is unacceptable.'

@@ -115,37 +115,32 @@ class Speedtester:
         return f"`{datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')}`"
 
     async def init_for_speedtest(self, opt: str = 'install') -> Optional[str]:
-        exists_file = path.exists(SPEEDTEST_PATH_FILE)
-        arch = platform.uname().machine
+        def exists_file() -> bool:
+            return path.exists(SPEEDTEST_PATH_FILE)
 
-        if arch not in ["x86_64", "aarch64"]:
-            text = f"Unsupported System Architecture: {arch}"
+        if platform.uname().system != "Linux":
+            text = f"Unsupported System >>> {platform.uname().system}"
             logger.warning(text)
             return text
-
         elif opt == 'install':
-            if not exists_file:
-                await self.__download_file(arch)
+            if not exists_file():
+                await self.__download_file()
                 logger.success("First install speedtest")
             return
-
         elif opt == 'update':
-            os.remove(SPEEDTEST_PATH_FILE)
-            await self.__download_file(arch)
-            if path.exists(SPEEDTEST_PATH_FILE):
+            if exists_file():
+                os.remove(SPEEDTEST_PATH_FILE)
+            await self.__download_file()
+            if exists_file():
                 text = "✅ Update speedtest successfully."
                 logger.success(text)
                 return text
             return "❌ Failed to update speedtest！"
-
         else:
             raise ValueError(f'Wrong speedtest option {opt}！')
 
-    async def __download_file(self, arch: str) -> None:
-        await basher(
-            INSTALL_SPEEDTEST.replace('<arch>', arch, 1),
-            timeout=30
-        )
+    async def __download_file(self) -> None:
+        await basher(INSTALL_SPEEDTEST, timeout=30)
 
 
 # import asyncio
